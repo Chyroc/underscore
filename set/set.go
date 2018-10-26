@@ -1,6 +1,8 @@
 package set
 
-import "sync"
+import (
+	"sync"
+)
 
 type set struct {
 	m sync.Map
