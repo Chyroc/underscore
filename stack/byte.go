@@ -5,28 +5,28 @@ import (
 	"strings"
 )
 
-func New() Stack {
-	return &stack{}
-}
-
-type Stack interface {
+type ByteStack interface {
 	fmt.Stringer
 
-	Push(i interface{})
-	Pop() interface{}
-	Peek() interface{}
+	Push(i byte)
+	Pop() byte
+	Peek() byte
 	Len() int
 	IsEmpty() bool
-	Clone() Stack
+	Clone() ByteStack
 }
 
-var _ Stack = (*stack)(nil)
-
-type stack struct {
-	is []interface{}
+func NewByte() ByteStack {
+	return &byteStack{}
 }
 
-func (s *stack) String() string {
+var _ ByteStack = (*byteStack)(nil)
+
+type byteStack struct {
+	is []byte
+}
+
+func (s *byteStack) String() string {
 	var buf = new(strings.Builder)
 	for i, v := range s.is {
 		if i == 0 {
@@ -38,11 +38,11 @@ func (s *stack) String() string {
 	return buf.String()
 }
 
-func (s *stack) Push(i interface{}) {
+func (s *byteStack) Push(i byte) {
 	s.is = append(s.is, i)
 }
 
-func (s *stack) Pop() interface{} {
+func (s *byteStack) Pop() byte {
 	if s.IsEmpty() {
 		panic("is empty")
 	}
@@ -51,23 +51,23 @@ func (s *stack) Pop() interface{} {
 	return p
 }
 
-func (s *stack) Peek() interface{} {
+func (s *byteStack) Peek() byte {
 	if s.IsEmpty() {
 		panic("is empty")
 	}
 	return s.is[len(s.is)-1]
 }
 
-func (s *stack) Len() int {
+func (s *byteStack) Len() int {
 	return len(s.is)
 }
 
-func (s *stack) IsEmpty() bool {
+func (s *byteStack) IsEmpty() bool {
 	return len(s.is) == 0
 }
 
-func (s *stack) Clone() Stack {
-	s2 := &stack{is: make([]interface{}, 0, len(s.is))}
+func (s *byteStack) Clone() ByteStack {
+	s2 := &byteStack{is: make([]byte, 0, len(s.is))}
 	for _, v := range s.is {
 		s2.is = append(s2.is, v)
 	}

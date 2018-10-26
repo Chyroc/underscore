@@ -1,6 +1,6 @@
 package set
 
-type String interface {
+type StringSet interface {
 	Exist(i string) bool
 	Add(i string)
 	Adds(list ...string)
@@ -9,7 +9,7 @@ type String interface {
 	List() []string
 }
 
-var _ String = (*set)(nil)
+var _ StringSet = (*set)(nil)
 
 func (s *set) Exist(i string) bool {
 	_, ok := s.m.Load(i)
@@ -45,6 +45,6 @@ func (s *set) List() []string {
 	return list
 }
 
-func NewString() String {
+func NewString() StringSet {
 	return &set{}
 }
