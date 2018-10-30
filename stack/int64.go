@@ -5,28 +5,28 @@ import (
 	"strings"
 )
 
-type StringStack interface {
+type Int64Stack interface {
 	fmt.Stringer
 
-	Push(i string)
-	Pop() string
-	Peek() string
+	Push(i int64)
+	Pop() int64
+	Peek() int64
 	Len() int
 	IsEmpty() bool
-	Clone() StringStack
+	Clone() Int64Stack
 }
 
-func NewString() StringStack {
-	return &stringStack{}
+func NewInt64() Int64Stack {
+	return &int64Stack{}
 }
 
-var _ StringStack = (*stringStack)(nil)
+var _ Int64Stack = (*int64Stack)(nil)
 
-type stringStack struct {
-	is []string
+type int64Stack struct {
+	is []int64
 }
 
-func (s *stringStack) String() string {
+func (s *int64Stack) String() string {
 	var buf = new(strings.Builder)
 	for i, v := range s.is {
 		if i == 0 {
@@ -38,11 +38,11 @@ func (s *stringStack) String() string {
 	return buf.String()
 }
 
-func (s *stringStack) Push(i string) {
+func (s *int64Stack) Push(i int64) {
 	s.is = append(s.is, i)
 }
 
-func (s *stringStack) Pop() string {
+func (s *int64Stack) Pop() int64 {
 	if s.IsEmpty() {
 		panic("stack is empty")
 	}
@@ -51,23 +51,23 @@ func (s *stringStack) Pop() string {
 	return p
 }
 
-func (s *stringStack) Peek() string {
+func (s *int64Stack) Peek() int64 {
 	if s.IsEmpty() {
 		panic("stack is empty")
 	}
 	return s.is[len(s.is)-1]
 }
 
-func (s *stringStack) Len() int {
+func (s *int64Stack) Len() int {
 	return len(s.is)
 }
 
-func (s *stringStack) IsEmpty() bool {
+func (s *int64Stack) IsEmpty() bool {
 	return len(s.is) == 0
 }
 
-func (s *stringStack) Clone() StringStack {
-	s2 := &stringStack{is: make([]string, 0, len(s.is))}
+func (s *int64Stack) Clone() Int64Stack {
+	s2 := &int64Stack{is: make([]int64, 0, len(s.is))}
 	for _, v := range s.is {
 		s2.is = append(s2.is, v)
 	}

@@ -25,6 +25,10 @@ func main() {
 		if err := GenerateSet(pkg, typ, output); err != nil {
 			log.Fatal(err)
 		}
+	case "stack":
+		if err := GenerateStack(pkg, typ, output); err != nil {
+			log.Fatal(err)
+		}
 	default:
 		fmt.Println(schema, pkg, output, typ)
 	}

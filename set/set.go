@@ -9,4 +9,5 @@
 //go:generate ../bin/underscore_generate -schema set -pkg set -o ../set/uint32.go -type uint32
 //go:generate ../bin/underscore_generate -schema set -pkg set -o ../set/uint64.go -type uint64
 //go:generate ../bin/underscore_generate -schema set -pkg set -o ../set/string.go -type string
+//go:generate ../bin/underscore_generate -schema set -pkg set -o ../set/interface.go -type interface{}
 package set

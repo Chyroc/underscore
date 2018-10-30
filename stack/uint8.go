@@ -5,28 +5,28 @@ import (
 	"strings"
 )
 
-type StringStack interface {
+type Uint8Stack interface {
 	fmt.Stringer
 
-	Push(i string)
-	Pop() string
-	Peek() string
+	Push(i uint8)
+	Pop() uint8
+	Peek() uint8
 	Len() int
 	IsEmpty() bool
-	Clone() StringStack
+	Clone() Uint8Stack
 }
 
-func NewString() StringStack {
-	return &stringStack{}
+func NewUint8() Uint8Stack {
+	return &uint8Stack{}
 }
 
-var _ StringStack = (*stringStack)(nil)
+var _ Uint8Stack = (*uint8Stack)(nil)
 
-type stringStack struct {
-	is []string
+type uint8Stack struct {
+	is []uint8
 }
 
-func (s *stringStack) String() string {
+func (s *uint8Stack) String() string {
 	var buf = new(strings.Builder)
 	for i, v := range s.is {
 		if i == 0 {
@@ -38,11 +38,11 @@ func (s *stringStack) String() string {
 	return buf.String()
 }
 
-func (s *stringStack) Push(i string) {
+func (s *uint8Stack) Push(i uint8) {
 	s.is = append(s.is, i)
 }
 
-func (s *stringStack) Pop() string {
+func (s *uint8Stack) Pop() uint8 {
 	if s.IsEmpty() {
 		panic("stack is empty")
 	}
@@ -51,23 +51,23 @@ func (s *stringStack) Pop() string {
 	return p
 }
 
-func (s *stringStack) Peek() string {
+func (s *uint8Stack) Peek() uint8 {
 	if s.IsEmpty() {
 		panic("stack is empty")
 	}
 	return s.is[len(s.is)-1]
 }
 
-func (s *stringStack) Len() int {
+func (s *uint8Stack) Len() int {
 	return len(s.is)
 }
 
-func (s *stringStack) IsEmpty() bool {
+func (s *uint8Stack) IsEmpty() bool {
 	return len(s.is) == 0
 }
 
-func (s *stringStack) Clone() StringStack {
-	s2 := &stringStack{is: make([]string, 0, len(s.is))}
+func (s *uint8Stack) Clone() Uint8Stack {
+	s2 := &uint8Stack{is: make([]uint8, 0, len(s.is))}
 	for _, v := range s.is {
 		s2.is = append(s2.is, v)
 	}
