@@ -8,6 +8,13 @@
 //go:generate ../bin/underscore_generate -schema stack -pkg stack -o ../stack/uint16.go -type uint16
 //go:generate ../bin/underscore_generate -schema stack -pkg stack -o ../stack/uint32.go -type uint32
 //go:generate ../bin/underscore_generate -schema stack -pkg stack -o ../stack/uint64.go -type uint64
+//go:generate ../bin/underscore_generate -schema stack -pkg stack -o ../stack/float32.go -type float32
+//go:generate ../bin/underscore_generate -schema stack -pkg stack -o ../stack/float64.go -type float64
+//go:generate ../bin/underscore_generate -schema stack -pkg stack -o ../stack/complex64.go -type complex64
+//go:generate ../bin/underscore_generate -schema stack -pkg stack -o ../stack/complex128.go -type complex128
+//go:generate ../bin/underscore_generate -schema stack -pkg stack -o ../stack/uintptr.go -type uintptr
+//go:generate ../bin/underscore_generate -schema stack -pkg stack -o ../stack/byte.go -type byte
+//go:generate ../bin/underscore_generate -schema stack -pkg stack -o ../stack/rune.go -type rune
 //go:generate ../bin/underscore_generate -schema stack -pkg stack -o ../stack/string.go -type string
 //go:generate ../bin/underscore_generate -schema stack -pkg stack -o ../stack/interface.go -type interface{}
 package stack

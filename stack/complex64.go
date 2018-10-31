@@ -7,28 +7,28 @@ import (
 	"strings"
 )
 
-type InterfaceStack interface {
+type Complex64Stack interface {
 	fmt.Stringer
 
-	Push(i interface{})
-	Pop() interface{}
-	Peek() interface{}
+	Push(i complex64)
+	Pop() complex64
+	Peek() complex64
 	Len() int
 	IsEmpty() bool
-	Clone() InterfaceStack
+	Clone() Complex64Stack
 }
 
-func NewInterface() InterfaceStack {
-	return &interfaceStack{}
+func NewComplex64() Complex64Stack {
+	return &complex64Stack{}
 }
 
-var _ InterfaceStack = (*interfaceStack)(nil)
+var _ Complex64Stack = (*complex64Stack)(nil)
 
-type interfaceStack struct {
-	is []interface{}
+type complex64Stack struct {
+	is []complex64
 }
 
-func (s *interfaceStack) String() string {
+func (s *complex64Stack) String() string {
 	var buf = new(strings.Builder)
 	for i, v := range s.is {
 		if i == 0 {
@@ -40,11 +40,11 @@ func (s *interfaceStack) String() string {
 	return buf.String()
 }
 
-func (s *interfaceStack) Push(i interface{}) {
+func (s *complex64Stack) Push(i complex64) {
 	s.is = append(s.is, i)
 }
 
-func (s *interfaceStack) Pop() interface{} {
+func (s *complex64Stack) Pop() complex64 {
 	if s.IsEmpty() {
 		panic("stack is empty")
 	}
@@ -53,23 +53,23 @@ func (s *interfaceStack) Pop() interface{} {
 	return p
 }
 
-func (s *interfaceStack) Peek() interface{} {
+func (s *complex64Stack) Peek() complex64 {
 	if s.IsEmpty() {
 		panic("stack is empty")
 	}
 	return s.is[len(s.is)-1]
 }
 
-func (s *interfaceStack) Len() int {
+func (s *complex64Stack) Len() int {
 	return len(s.is)
 }
 
-func (s *interfaceStack) IsEmpty() bool {
+func (s *complex64Stack) IsEmpty() bool {
 	return len(s.is) == 0
 }
 
-func (s *interfaceStack) Clone() InterfaceStack {
-	s2 := &interfaceStack{is: make([]interface{}, 0, len(s.is))}
+func (s *complex64Stack) Clone() Complex64Stack {
+	s2 := &complex64Stack{is: make([]complex64, 0, len(s.is))}
 	for _, v := range s.is {
 		s2.is = append(s2.is, v)
 	}

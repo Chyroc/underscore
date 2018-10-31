@@ -7,28 +7,28 @@ import (
 	"strings"
 )
 
-type InterfaceStack interface {
+type UintptrStack interface {
 	fmt.Stringer
 
-	Push(i interface{})
-	Pop() interface{}
-	Peek() interface{}
+	Push(i uintptr)
+	Pop() uintptr
+	Peek() uintptr
 	Len() int
 	IsEmpty() bool
-	Clone() InterfaceStack
+	Clone() UintptrStack
 }
 
-func NewInterface() InterfaceStack {
-	return &interfaceStack{}
+func NewUintptr() UintptrStack {
+	return &uintptrStack{}
 }
 
-var _ InterfaceStack = (*interfaceStack)(nil)
+var _ UintptrStack = (*uintptrStack)(nil)
 
-type interfaceStack struct {
-	is []interface{}
+type uintptrStack struct {
+	is []uintptr
 }
 
-func (s *interfaceStack) String() string {
+func (s *uintptrStack) String() string {
 	var buf = new(strings.Builder)
 	for i, v := range s.is {
 		if i == 0 {
@@ -40,11 +40,11 @@ func (s *interfaceStack) String() string {
 	return buf.String()
 }
 
-func (s *interfaceStack) Push(i interface{}) {
+func (s *uintptrStack) Push(i uintptr) {
 	s.is = append(s.is, i)
 }
 
-func (s *interfaceStack) Pop() interface{} {
+func (s *uintptrStack) Pop() uintptr {
 	if s.IsEmpty() {
 		panic("stack is empty")
 	}
@@ -53,23 +53,23 @@ func (s *interfaceStack) Pop() interface{} {
 	return p
 }
 
-func (s *interfaceStack) Peek() interface{} {
+func (s *uintptrStack) Peek() uintptr {
 	if s.IsEmpty() {
 		panic("stack is empty")
 	}
 	return s.is[len(s.is)-1]
 }
 
-func (s *interfaceStack) Len() int {
+func (s *uintptrStack) Len() int {
 	return len(s.is)
 }
 
-func (s *interfaceStack) IsEmpty() bool {
+func (s *uintptrStack) IsEmpty() bool {
 	return len(s.is) == 0
 }
 
-func (s *interfaceStack) Clone() InterfaceStack {
-	s2 := &interfaceStack{is: make([]interface{}, 0, len(s.is))}
+func (s *uintptrStack) Clone() UintptrStack {
+	s2 := &uintptrStack{is: make([]uintptr, 0, len(s.is))}
 	for _, v := range s.is {
 		s2.is = append(s2.is, v)
 	}

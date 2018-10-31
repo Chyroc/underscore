@@ -8,6 +8,13 @@
 //go:generate ../bin/underscore_generate -schema set -pkg set -o ../set/uint16.go -type uint16
 //go:generate ../bin/underscore_generate -schema set -pkg set -o ../set/uint32.go -type uint32
 //go:generate ../bin/underscore_generate -schema set -pkg set -o ../set/uint64.go -type uint64
+//go:generate ../bin/underscore_generate -schema set -pkg set -o ../set/float32.go -type float32
+//go:generate ../bin/underscore_generate -schema set -pkg set -o ../set/float64.go -type float64
+//go:generate ../bin/underscore_generate -schema set -pkg set -o ../set/complex64.go -type complex64
+//go:generate ../bin/underscore_generate -schema set -pkg set -o ../set/complex128.go -type complex128
+//go:generate ../bin/underscore_generate -schema set -pkg set -o ../set/uintptr.go -type uintptr
+//go:generate ../bin/underscore_generate -schema set -pkg set -o ../set/byte.go -type byte
+//go:generate ../bin/underscore_generate -schema set -pkg set -o ../set/rune.go -type rune
 //go:generate ../bin/underscore_generate -schema set -pkg set -o ../set/string.go -type string
 //go:generate ../bin/underscore_generate -schema set -pkg set -o ../set/interface.go -type interface{}
 package set

@@ -7,28 +7,28 @@ import (
 	"strings"
 )
 
-type InterfaceStack interface {
+type Complex128Stack interface {
 	fmt.Stringer
 
-	Push(i interface{})
-	Pop() interface{}
-	Peek() interface{}
+	Push(i complex128)
+	Pop() complex128
+	Peek() complex128
 	Len() int
 	IsEmpty() bool
-	Clone() InterfaceStack
+	Clone() Complex128Stack
 }
 
-func NewInterface() InterfaceStack {
-	return &interfaceStack{}
+func NewComplex128() Complex128Stack {
+	return &complex128Stack{}
 }
 
-var _ InterfaceStack = (*interfaceStack)(nil)
+var _ Complex128Stack = (*complex128Stack)(nil)
 
-type interfaceStack struct {
-	is []interface{}
+type complex128Stack struct {
+	is []complex128
 }
 
-func (s *interfaceStack) String() string {
+func (s *complex128Stack) String() string {
 	var buf = new(strings.Builder)
 	for i, v := range s.is {
 		if i == 0 {
@@ -40,11 +40,11 @@ func (s *interfaceStack) String() string {
 	return buf.String()
 }
 
-func (s *interfaceStack) Push(i interface{}) {
+func (s *complex128Stack) Push(i complex128) {
 	s.is = append(s.is, i)
 }
 
-func (s *interfaceStack) Pop() interface{} {
+func (s *complex128Stack) Pop() complex128 {
 	if s.IsEmpty() {
 		panic("stack is empty")
 	}
@@ -53,23 +53,23 @@ func (s *interfaceStack) Pop() interface{} {
 	return p
 }
 
-func (s *interfaceStack) Peek() interface{} {
+func (s *complex128Stack) Peek() complex128 {
 	if s.IsEmpty() {
 		panic("stack is empty")
 	}
 	return s.is[len(s.is)-1]
 }
 
-func (s *interfaceStack) Len() int {
+func (s *complex128Stack) Len() int {
 	return len(s.is)
 }
 
-func (s *interfaceStack) IsEmpty() bool {
+func (s *complex128Stack) IsEmpty() bool {
 	return len(s.is) == 0
 }
 
-func (s *interfaceStack) Clone() InterfaceStack {
-	s2 := &interfaceStack{is: make([]interface{}, 0, len(s.is))}
+func (s *complex128Stack) Clone() Complex128Stack {
+	s2 := &complex128Stack{is: make([]complex128, 0, len(s.is))}
 	for _, v := range s.is {
 		s2.is = append(s2.is, v)
 	}

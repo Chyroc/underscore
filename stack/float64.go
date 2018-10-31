@@ -7,28 +7,28 @@ import (
 	"strings"
 )
 
-type InterfaceStack interface {
+type Float64Stack interface {
 	fmt.Stringer
 
-	Push(i interface{})
-	Pop() interface{}
-	Peek() interface{}
+	Push(i float64)
+	Pop() float64
+	Peek() float64
 	Len() int
 	IsEmpty() bool
-	Clone() InterfaceStack
+	Clone() Float64Stack
 }
 
-func NewInterface() InterfaceStack {
-	return &interfaceStack{}
+func NewFloat64() Float64Stack {
+	return &float64Stack{}
 }
 
-var _ InterfaceStack = (*interfaceStack)(nil)
+var _ Float64Stack = (*float64Stack)(nil)
 
-type interfaceStack struct {
-	is []interface{}
+type float64Stack struct {
+	is []float64
 }
 
-func (s *interfaceStack) String() string {
+func (s *float64Stack) String() string {
 	var buf = new(strings.Builder)
 	for i, v := range s.is {
 		if i == 0 {
@@ -40,11 +40,11 @@ func (s *interfaceStack) String() string {
 	return buf.String()
 }
 
-func (s *interfaceStack) Push(i interface{}) {
+func (s *float64Stack) Push(i float64) {
 	s.is = append(s.is, i)
 }
 
-func (s *interfaceStack) Pop() interface{} {
+func (s *float64Stack) Pop() float64 {
 	if s.IsEmpty() {
 		panic("stack is empty")
 	}
@@ -53,23 +53,23 @@ func (s *interfaceStack) Pop() interface{} {
 	return p
 }
 
-func (s *interfaceStack) Peek() interface{} {
+func (s *float64Stack) Peek() float64 {
 	if s.IsEmpty() {
 		panic("stack is empty")
 	}
 	return s.is[len(s.is)-1]
 }
 
-func (s *interfaceStack) Len() int {
+func (s *float64Stack) Len() int {
 	return len(s.is)
 }
 
-func (s *interfaceStack) IsEmpty() bool {
+func (s *float64Stack) IsEmpty() bool {
 	return len(s.is) == 0
 }
 
-func (s *interfaceStack) Clone() InterfaceStack {
-	s2 := &interfaceStack{is: make([]interface{}, 0, len(s.is))}
+func (s *float64Stack) Clone() Float64Stack {
+	s2 := &float64Stack{is: make([]float64, 0, len(s.is))}
 	for _, v := range s.is {
 		s2.is = append(s2.is, v)
 	}
