@@ -41,14 +41,19 @@ func (r *intRange) parse() ([]int, error) {
 				return nil, err
 			}
 		case r.s[r.cur] == '-':
+			debug.Println(r.bar)
 			if r.cur == len(r.s)-1 {
 				return nil, errors.New("1]invalid int range string: " + r.s)
 			}
 			if !r.preValid {
 				return nil, errors.New("2]invalid int range string: " + r.s)
 			}
+			if !r.bar {
+				return nil, errors.New("2]invalid int range string: " + r.s)
+			}
 
 			r.cur++
+			r.bar = false
 			r.preValid = false
 			next, err := r.scanInt()
 			if err != nil {
@@ -105,9 +110,9 @@ func (r *intRange) scanInt() (int, error) {
 			r.bar = true
 			return pre, nil
 		case r.s[r.cur] == ',':
-			if r.comma || r.bar {
-				return 0, errors.New("6]invalid int range string: " + r.s)
-			}
+			//if r.comma || r.bar {
+			//	return 0, errors.New("6]invalid int range string: " + r.s)
+			//}
 			r.comma = true
 			return pre, nil
 		default:
