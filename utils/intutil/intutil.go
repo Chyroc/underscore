@@ -2,7 +2,7 @@ package intutil
 
 import (
 	"errors"
-	"github.com/Chyroc/readcode/debug"
+	"github.com/Chyroc/underscore/debug"
 )
 
 func IsDigital(i byte) bool {
